@@ -44,7 +44,8 @@ let g:solarized_visibility=     "high"
 let g:solarized_hitrail   =     1
 let g:solarized_menu      =     0
 " Use colorschem
-colorscheme molokai
+" colorscheme molokai
+colorscheme gruvbox
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
