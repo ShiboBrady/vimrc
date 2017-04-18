@@ -137,6 +137,26 @@ Plug 'uarun/vim-protobuf'
 call plug#end()
 
 """"""""""""""""""""""""""""""
+" => Molokai
+""""""""""""""""""""""""""""""
+let g:molokai_original=1
+let g:rehash256 = 1
+
+""""""""""""""""""""""""""""""
+" => Solarized 
+""""""""""""""""""""""""""""""
+let g:solarized_termcolors=     256
+let g:solarized_termtrans =     1
+let g:solarized_degrade   =     1
+let g:solarized_bold      =     0
+let g:solarized_underline =     0
+let g:solarized_italic    =     0
+let g:solarized_contrast  =     "high"
+let g:solarized_visibility=     "high"
+let g:solarized_hitrail   =     1
+let g:solarized_menu      =     0
+
+""""""""""""""""""""""""""""""
 " => bufExplorer plugin
 """"""""""""""""""""""""""""""
 let g:bufExplorerDefaultHelp=0
