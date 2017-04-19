@@ -332,7 +332,7 @@ nnoremap <leader>gf :YcmForceCompileAndDiagnostics <CR>
 nnoremap <leader>gx :YcmCompleter FixIt<CR>
 nnoremap <leader>gc :YcmDiags<CR>
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim_runtime/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_min_num_identifier_candidate_chars = 4
 let g:ycm_extra_conf_globlist = ['~/repos/*']
@@ -378,6 +378,11 @@ let g:clang_format#style_options = {
 
 " Toggle auto formatting:
 nmap <Leader>C :ClangFormatAutoToggle<CR>
+if has("autocmd")
+    " map to <Leader>cf in C++ code
+    autocmd FileType c,cpp,objc,java,py nnoremap <buffer><Leader>fcc :<C-u>ClangFormat<CR>
+    autocmd FileType c,cpp,objc,java,py vnoremap <buffer><Leader>fcc :ClangFormat<CR>
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ctrlp
@@ -432,7 +437,7 @@ let g:gundo_width=80
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger="ii"
 " we can't use <tab> as our snippet key since we use that with YouCompleteMe
-let g:UltiSnipsSnippetsDir         = $HOME . '/dotfiles/vim/UltiSnips'
+let g:UltiSnipsSnippetsDir         = '~./vim_runtime/temp_dirs/UltiSnips'
 let g:UltiSnipsListSnippets        = "<c-m-s>"
 let g:UltiSnipsJumpForwardTrigger  = "<right>"
 let g:UltiSnipsJumpBackwardTrigger = "<left>"
@@ -457,6 +462,17 @@ let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
 let g:nerdtree_tabs_open_on_gui_startup=0
+
+if has("autocmd")
+    " close vim if the only window left open is a NERDTree
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    " open NERDTree automatically when vim starts up on opening a directory
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+    " open a NERDTree automatically when vim starts up if no files were specified
+    " autocmd StdinReadPre * let s:std_in=1
+    " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Rainbrow
@@ -687,6 +703,21 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+if has("autocmd")
+    " Vim-Go
+    autocmd FileType go nmap <leader>r <Plug>(go-run)
+    autocmd FileType go nmap <leader>b <Plug>(go-build)
+    autocmd FileType go nmap <leader>t <Plug>(go-test)
+    autocmd FileType go nmap <leader>c <Plug>(go-coverage)
+
+    autocmd FileType go nmap <leader>ds <Plug>(go-def-split)
+    autocmd FileType go nmap <leader>dv <Plug>(go-def-vertical)
+    autocmd FileType go nmap <leader>dt <Plug>(go-def-tab)
+    autocmd FileType go nmap <leader>gb <Plug>(go-doc-browser)
+    autocmd FileType go nmap <leader>s <Plug>(go-implements)
+    autocmd FileType go nmap <leader>i <Plug>(go-info)
+    autocmd FileType go nmap <leader>e <Plug>(go-rename)
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Highlight Operator Fuction
@@ -718,77 +749,3 @@ let g:wildfire_objects = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
 let g:vim_json_syntax_conceal = 0
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => AutoCommands
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-    " Enable file type detection.
-    " Use the default filetype settings, so that mail gets 'tw' set to 72,
-    " 'cindent' is on in C files, etc.
-    " Also load indent files, to automatically do language-dependent indenting.
-    filetype plugin indent on
-
-    " Put these in an autocmd group, so that we can delete them easily.
-    augroup vimrcEx
-        au!
-
-        " For all text files set 'textwidth' to 78 characters.
-        autocmd FileType text setlocal textwidth=78
-
-        " When editing a file, always jump to the last known cursor position.
-        " Don't do it when the position is invalid or when inside an event handler
-        " (happens when dropping a file on gvim).
-        " Also don't do it when the mark is in the first line, that is the default
-        " position when opening a file.
-        autocmd BufReadPost *
-                    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-                    \   exe "normal! g`\"" |
-                    \ endif
-
-        autocmd BufWrite *.py :call DeleteTrailingWS()
-
-        autocmd User YcmQuickFixOpened call s:CustomizeYcmQuickFixWindow()
-        " Enable omni completion.
-        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-        autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-        autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-        autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-        " map to <Leader>cf in C++ code
-        autocmd FileType c,cpp,objc,java,py nnoremap <buffer><Leader>fcc :<C-u>ClangFormat<CR>
-        autocmd FileType c,cpp,objc,java,py vnoremap <buffer><Leader>fcc :ClangFormat<CR>
-
-        " close vim if the only window left open is a NERDTree
-        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-        " open NERDTree automatically when vim starts up on opening a directory
-        autocmd StdinReadPre * let s:std_in=1
-        autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-        " open a NERDTree automatically when vim starts up if no files were specified
-        " autocmd StdinReadPre * let s:std_in=1
-        " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-        " Vim-Go
-        autocmd FileType go nmap <leader>r <Plug>(go-run)
-        autocmd FileType go nmap <leader>b <Plug>(go-build)
-        autocmd FileType go nmap <leader>t <Plug>(go-test)
-        autocmd FileType go nmap <leader>c <Plug>(go-coverage)
-
-        autocmd FileType go nmap <leader>ds <Plug>(go-def-split)
-        autocmd FileType go nmap <leader>dv <Plug>(go-def-vertical)
-        autocmd FileType go nmap <leader>dt <Plug>(go-def-tab)
-        autocmd FileType go nmap <leader>gb <Plug>(go-doc-browser)
-        autocmd FileType go nmap <leader>s <Plug>(go-implements)
-        autocmd FileType go nmap <leader>i <Plug>(go-info)
-        autocmd FileType go nmap <leader>e <Plug>(go-rename)
-
-        " Highlight
-        " autocmd Syntax * call s:HighlightOperators()
-        " autocmd ColorScheme * call s:HighlightOperators()
-    augroup END
-endif
