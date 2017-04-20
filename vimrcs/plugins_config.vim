@@ -13,38 +13,31 @@ Plug 'xolox/vim-misc'
 Plug 'vim-scripts/tlib'
 Plug 'vim-scripts/vimprj'
 
-" Man
+" Man and Help
 Plug 'nhooyr/neoman.vim'
+Plug 'lifepillar/vim-cheat40'
 
 " Font and Corlor and Theme
 Plug 'powerline/fonts'
 Plug 'luochen1990/rainbow'
 Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
-Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " General
-Plug 'lifepillar/vim-cheat40'
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'kien/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
-Plug 'kshenoy/vim-signature'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mileszs/ack.vim'
-Plug 'sjl/gundo.vim'
+Plug 'mbbill/undotree'
 Plug 'google/vim-searchindex'
 Plug 'nelstrom/vim-qargs'
-Plug 'lfv89/vim-interestingwords'
-Plug 'xolox/vim-session'
-Plug 'godlygeek/tabular'
 Plug 'vim-scripts/matchit.zip'
 Plug 'osyo-manga/vim-over'
 Plug 'gcmt/wildfire.vim'
@@ -55,7 +48,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'amix/vim-zenroom2'
 Plug 'terryma/vim-expand-region'
 Plug 'tpope/vim-commentary'
-Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'yegappan/mru'
@@ -65,7 +57,6 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'Valloric/ListToggle'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-Plug 'vim-scripts/taglist.vim'
 Plug 'vim-scripts/indexer.tar.gz'
 Plug 'rhysd/vim-clang-format'
 Plug 'vim-scripts/a.vim'
@@ -83,23 +74,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'rhysd/conflict-marker.vim'
 
-" Shell
-Plug 'oplatek/Conque-Shell'
-
 " Ttmux
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux'
 
 " Vim script
-Plug 'kchmck/vim-coffee-script'
 Plug 'digitaltoad/vim-pug'
 
 " System language
 Plug 'nickhutchinson/vim-systemtap'
-
-" Haskell
-Plug 'eagletmt/ghcmod-vim'
-Plug 'neovimhaskell/haskell-vim'
 
 " Python
 Plug 'davidhalter/jedi-vim'
@@ -109,15 +92,6 @@ Plug 'hdima/python-syntax'
 Plug 'python.vim'
 Plug 'xolox/vim-pyref'
 
-" Php
-Plug 'spf13/PIV'
-Plug 'shawncplus/phpcomplete.vim'
-Plug 'joonty/vdebug'
-
-"Html
-Plug 'groenewege/vim-less'
-Plug 'mattn/emmet-vim'
-
 " Nginx
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'vim-scripts/httplog'
@@ -125,10 +99,8 @@ Plug 'vim-scripts/httplog'
 " Json
 Plug 'elzr/vim-json'
 
-" Javascript
+" Javascript and Java
 Plug 'marijnh/tern_for_vim'
-
-" Java
 Plug 'artur-shaik/vim-javacomplete2'
 
 " Protobuf
@@ -143,7 +115,7 @@ let g:molokai_original=1
 let g:rehash256 = 1
 
 """"""""""""""""""""""""""""""
-" => Solarized 
+" => Solarized
 """"""""""""""""""""""""""""""
 let g:solarized_termcolors=     256
 let g:solarized_termtrans =     1
@@ -172,12 +144,6 @@ let MRU_Max_Entries = 400
 map <leader>f :MRU<CR>
 
 """"""""""""""""""""""""""""""
-" => YankStack
-""""""""""""""""""""""""""""""
-nmap <c-p> <Plug>yankstack_substitute_older_paste
-nmap <c-P> <Plug>yankstack_substitute_newer_paste
-
-""""""""""""""""""""""""""""""
 " => ZenCoding(Emmit)
 """"""""""""""""""""""""""""""
 " Enable all functions in all modes
@@ -204,77 +170,6 @@ nnoremap <silent> <leader>z :Goyo<cr>
 let g:gitgutter_enabled=1
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
 let g:gitgutter_max_signs=500  " default value
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Taglist
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let Tlist_Ctags_Cmd='/usr/bin/ctags -R'
-let Tlist_Auto_Highlight_Tag = 1
-let Tlist_Auto_Open = 0
-let Tlist_Auto_Update = 1
-let Tlist_Close_On_Select = 0
-let Tlist_Compact_Format = 0
-let Tlist_Display_Prototype = 0
-let Tlist_File_Fold_Auto_Close = 0
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Hightlight_Tag_On_BufEnter = 1
-let Tlist_Inc_Winwidth = 0
-let Tlist_Max_Submenu_Items = 1
-let Tlist_Max_Tag_Length = 30
-let Tlist_Process_File_Always = 0
-let Tlist_Show_Menu = 0
-let Tlist_Show_One_File =1
-let Tlist_Sort_Type = "order"
-let Tlist_WinWidth = 30
-let Tlist_Use_Horiz_Window = 0
-let Tlist_Use_Right_Window = 1
-let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Cscope
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has("cscope")
-    set csprg=/usr/bin/cscope
-    set csto=1
-    set cst
-    set nocsverb
-    " add any database in current directory
-    if filereadable("cscope.out")
-        cs add cscope.out
-    endif
-    set csverb
-endif
-
-nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Generate file for ctags and cscope
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F6> :call Do_CsTag()<cr>
-function! Do_CsTag()
-    let dir = getcwd()
-
-    if(executable('ctags'))
-        silent! execute "!ctags -R --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
-    endif
-    if(executable('cscope') && has("cscope") )
-        silent! execute "!find . -iname '*.[ch]' -o -name '*.cpp' -o -name '*.cc' -o -name '*.ipp' -o -name '*.hpp' -o -name '*.php'"> cscope.files"
-        silent! execute "!cscope -b"
-        execute "normal :"
-        if filereadable("cscope.out")
-            execute "cs add cscope.out"
-        endif
-    endif
-    " refresh screen
-    execute "redr!"
-endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic (syntax checker)
@@ -306,15 +201,6 @@ let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
 
-" Custom CoffeeScript SyntasticCheck
-func! SyntasticCheckCoffeescript()
-    let l:filename = substitute(expand("%:p"), '\(\w\+\)\.coffee', '.coffee.\1.js', '')
-    execute "tabedit " . l:filename
-    execute "SyntasticCheck"
-    execute "Errors"
-endfunc
-nnoremap <silent> <leader>c :call SyntasticCheckCoffeescript()<cr>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ycm
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -343,11 +229,6 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 " => Indexer
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q "
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vdebug
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vdebug_options = {'break_on_open': 1, 'port' : 9090, 'server' : '127.0.0.1'}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Gdb
@@ -385,38 +266,11 @@ if has("autocmd")
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ctrlp
+" => FZF 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_map = '<c-f>'
-map <leader>j :CtrlP<cr>
-map <leader>jb :CtrlPBuffer<cr>
-let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/]\.(git|hg|svn|build)$',
-            \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|.DS_Store)$',
-            \ 'link': 'some_bad_symbolic_links',
-            \ }
-"disable caching
-let g:ctrlp_use_caching=0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30'
-" Faster indexing of files; requires having ag (AKA the_silver_searcher)
-" installed.
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-            \ --ignore .git
-            \ --ignore .svn
-            \ --ignore .hg
-            \ --ignore .DS_Store
-            \ --ignore "**/*.pyc"
-            \ --ignore BoostParts
-            \ -g ""'
-
-let g:ctrlp_extensions = ['funky']
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Funky
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <Leader>fu :CtrlPFunky<Cr>
+map <leader>f :FZF<cr>
+map <leader>F :FZF!<cr>
+let g:fzf_command_prefix = 'Fzf'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ListToggle
@@ -426,11 +280,10 @@ let g:lt_quickfix_list_toggle_map = '<leader>lq'
 let g:lt_height = 10
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Gundo
+" => Undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" \ud toggles the Gundo plugin window
-nnoremap <leader>t :GundoToggle<CR>
-let g:gundo_width=80
+"toggles the undo plugin window
+nnoremap <leader>dt :UndotreeToggle<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => UltiSnip and Snippet
@@ -528,7 +381,9 @@ nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ackprg
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <leader>cc :Ack<CR>
+" Open Ack and put the cursor in the right position
+map <leader>g :Ack 
+nmap <leader>gg :Ack<CR>
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
     let g:ackprg = "ag --nocolor --nogroup --column"
@@ -542,32 +397,10 @@ endif
 " => Airline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'gruvbox'
+let g:airline_theme = 'dark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Interestingwords
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <leader>k :call InterestingWords('n')<cr>
-nnoremap <silent> <leader>K :call UncolorAllWords()<cr>
-nnoremap <silent> n :call WordNavigation('forward')<cr>
-nnoremap <silent> N :call WordNavigation('backward')<cr>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Session
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:session_autoload        = 'no'
-let g:session_autosave        = 'yes'
-let g:session_default_to_last = 'yes'
-let g:session_directory       = '~/.vim_runtime/temp_dirs/sessions'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => CtrlPfunky
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <Leader>fu :CtrlPFunky<Cr>
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Tmux navigator
@@ -618,7 +451,7 @@ let g:yankring_history_dir = '~/.vim_runtime/temp_dirs'
 " this is so that single char deletes don't end up in the yankring
 let g:yankring_min_element_length = 2
 let g:yankring_window_height = 14
-nnoremap <leader>r :YRShow<CR>
+nnoremap <leader>y :YRShow<CR>
 
 " this makes Y yank from the cursor to the end of the line, which makes more
 " sense than the default of yanking the whole current line (we can use yy for
@@ -626,34 +459,6 @@ nnoremap <leader>r :YRShow<CR>
 function! YRRunAfterMaps()
     nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
 endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Tabularize
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" looks at the current line and the lines above and below it and aligns all the
-" equals signs; useful for when we have several lines of declarations
-nnoremap <Leader>b = :Tabularize / = <CR>
-vnoremap <Leader>b = :Tabularize / = <CR>
-nnoremap <Leader>b/ :Tabularize /\/\//l2c1l0<CR>
-vnoremap <Leader>b/ :Tabularize /\/\//l2c1l0<CR>
-nnoremap <Leader>b, :Tabularize /,/l0r1<CR>
-vnoremap <Leader>b, :Tabularize /,/l0r1<CR>
-nnoremap <Leader>b& :Tabularize /&<CR>
-vnoremap <Leader>b& :Tabularize /&<CR>
-nnoremap <Leader>b= :Tabularize /^[^=]*\zs=<CR>
-vnoremap <Leader>b= :Tabularize /^[^=]*\zs=<CR>
-nnoremap <Leader>b=> :Tabularize /=><CR>
-vnoremap <Leader>b=> :Tabularize /=><CR>
-nnoremap <Leader>b: :Tabularize /:<CR>
-vnoremap <Leader>b: :Tabularize /:<CR>
-nnoremap <Leader>b:: :Tabularize /:\zs<CR>
-vnoremap <Leader>b:: :Tabularize /:\zs<CR>
-nnoremap <Leader>b, :Tabularize /,<CR>
-vnoremap <Leader>b, :Tabularize /,<CR>
-nnoremap <Leader>b,, :Tabularize /,\zs<CR>
-vnoremap <Leader>b,, :Tabularize /,\zs<CR>
-nnoremap <Leader>b<Bar> :Tabularize /<Bar><CR>
-vnoremap <Leader>b<Bar> :Tabularize /<Bar><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => EasyMotion
@@ -718,23 +523,6 @@ if has("autocmd")
     autocmd FileType go nmap <leader>i <Plug>(go-info)
     autocmd FileType go nmap <leader>e <Plug>(go-rename)
 endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Highlight Operator Fuction
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! s:HighlightOperators()
-    " for the last element of the regex, see :h /\@!
-    " basically, searching for "/" is more complex since we want to avoid
-    " matching against "//" or "/*" which would break C++ comment highlighting
-    syntax match OperatorChars "?\|+\|-\|\*\|;\|:\|,\|&\||\|!\|\~\|%\|=\|\.\|/\(/\|*\)\@!"
-    hi OperatorChars ctermfg=160
-    hi OperatorChars guifg=#F6FF00
-endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ale
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ale_emit_conflict_warnings = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Wildfire
