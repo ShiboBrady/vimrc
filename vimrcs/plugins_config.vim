@@ -390,7 +390,7 @@ endif
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_map = '<c-f>'
 map <leader>j :CtrlP<cr>
-map <c-b> :CtrlPBuffer<cr>
+map <leader>jb :CtrlPBuffer<cr>
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\v[\/]\.(git|hg|svn|build)$',
             \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|.DS_Store)$',
