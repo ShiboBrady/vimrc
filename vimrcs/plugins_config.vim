@@ -528,7 +528,7 @@ nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ackprg
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <leader>c :Ack<CR>
+nmap <leader>cc :Ack<CR>
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
     let g:ackprg = "ag --nocolor --nogroup --column"
