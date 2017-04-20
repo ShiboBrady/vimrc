@@ -9,8 +9,6 @@
 call plug#begin('~/.vim_runtime/plugged')
 " VimL Lib
 Plug 'vim-scripts/DfrankUtil'
-Plug 'xolox/vim-misc'
-Plug 'vim-scripts/tlib'
 Plug 'vim-scripts/vimprj'
 
 " Man and Help
@@ -85,12 +83,7 @@ Plug 'digitaltoad/vim-pug'
 Plug 'nickhutchinson/vim-systemtap'
 
 " Python
-Plug 'davidhalter/jedi-vim'
 Plug 'klen/python-mode', { 'branch': 'master' }
-Plug 'fs111/pydoc.vim'
-Plug 'hdima/python-syntax'
-Plug 'python.vim'
-Plug 'xolox/vim-pyref'
 
 " Nginx
 Plug 'evanmiller/nginx-vim-syntax'
@@ -141,7 +134,7 @@ map <leader>o :BufExplorer<cr>
 " => MRU plugin
 """"""""""""""""""""""""""""""
 let MRU_Max_Entries = 400
-map <leader>f :MRU<CR>
+map <leader>F :MRU<CR>
 
 """"""""""""""""""""""""""""""
 " => ZenCoding(Emmit)
@@ -266,10 +259,10 @@ if has("autocmd")
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => FZF 
+" => FZF
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>f :FZF<cr>
-map <leader>F :FZF!<cr>
+map <leader>fu :FZF!<cr>
 let g:fzf_command_prefix = 'Fzf'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -382,11 +375,10 @@ nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 " => Ackprg
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Open Ack and put the cursor in the right position
-map <leader>g :Ack 
+map <leader>g :Ack
 nmap <leader>gg :Ack<CR>
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
-    let g:ackprg = "ag --nocolor --nogroup --column"
 elseif executable('ack-grep')
     let g:ackprg = "ack-grep --nocolor --nogroup --column"
 elseif executable('ack')
@@ -426,11 +418,6 @@ let g:pymode_rope_complete_on_dot = 0
 "let g:pymode_python = 'python'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Pydoc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:pydoc_cmd = "/usr/bin/pydoc"
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => cpp higlight
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:cpp_class_scope_highlight = 1
@@ -438,11 +425,6 @@ let g:cpp_concepts_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => DelimitMate
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let delimitMate_expand_cr = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YankRing
@@ -485,7 +467,7 @@ if has("gui_macvim")
     let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 endif
 
-nnoremap <Leader>tb :TagbarToggle<cr><c-w>=
+nnoremap <Leader>tt :TagbarToggle<cr><c-w>=
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vim-indent-guides
