@@ -28,8 +28,7 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
@@ -49,7 +48,18 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/limelight.vim'
 
 " Program
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-completer' }
+function! BuildYCM(info)
+    if a:info.status == 'installed' || a:info.force
+        !./install.py --clang-completer --gocode-completer --tern-completer
+    endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM')}
+function! BuildColorCoded(info)
+    if a:info.status == 'installed' || a:info.force
+        silent !(mkdir build; cd build; cmake ..; make; make install)
+    endif
+endfunction
+Plug 'jeaye/color_coded', {'do' : function('BuildColorCoded')}
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'Valloric/ListToggle'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
@@ -58,6 +68,7 @@ Plug 'rhysd/vim-clang-format'
 Plug 'vim-scripts/a.vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/syntastic'
+" Plug 'w0rp/ale'
 Plug 'vim-scripts/Conque-GDB'
 Plug 'Mizuchi/STL-Syntax'
 Plug 'octol/vim-cpp-enhanced-highlight'
