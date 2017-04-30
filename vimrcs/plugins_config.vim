@@ -46,6 +46,9 @@ Plug 'amix/vim-zenroom2'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'yegappan/mru'
+Plug 'justinmk/vim-gtfo'
+Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/limelight.vim'
 
 " Program
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer --tern-completer' }
@@ -68,6 +71,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'rhysd/conflict-marker.vim'
+Plug 'junegunn/gv.vim'
 
 " Ttmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -152,6 +156,35 @@ au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
 let g:goyo_width=100
 let g:goyo_margin_top = 2
 let g:goyo_margin_bottom = 2
+let g:limelight_paragraph_span = 1
+let g:limelight_priority = -1
+
+function! s:goyo_enter()
+    if has('gui_running')
+        set fullscreen
+        set background=light
+        set linespace=7
+    elseif exists('$TMUX')
+        silent !tmux set status off
+    endif
+    Limelight
+    let &l:statusline = '%M'
+    hi StatusLine ctermfg=red guifg=red cterm=NONE gui=NONE
+endfunction
+
+function! s:goyo_leave()
+    if has('gui_running')
+        set nofullscreen
+        set background=dark
+        set linespace=0
+    elseif exists('$TMUX')
+        silent !tmux set status on
+    endif
+    Limelight!
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
 nnoremap <silent> <leader>z :Goyo<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -262,6 +295,33 @@ map <leader>f :FZF<cr>
 map <leader>fu :FZF!<cr>
 let g:fzf_command_prefix = 'Fzf'
 
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Advanced customization using autoload functions
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+
+" Replace the default dictionary completion with fzf-based fuzzy completion
+inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
+
+function! s:make_sentence(lines)
+  return substitute(join(a:lines), '^.', '\=toupper(submatch(0))', '').'.'
+endfunction
+
+inoremap <expr> <c-x><c-s> fzf#complete({
+  \ 'source':  'cat /usr/share/dict/words',
+  \ 'reducer': function('<sid>make_sentence'),
+  \ 'options': '--multi --reverse --margin 15%,0',
+  \ 'left':    20})
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ListToggle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -316,31 +376,6 @@ if has("autocmd")
     " autocmd StdinReadPre * let s:std_in=1
     " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Rainbrow
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:rbpt_colorpairs = [
-            \ ['brown',       'RoyalBlue3'],
-            \ ['Darkblue',    'SeaGreen3'],
-            \ ['darkgray',    'DarkOrchid3'],
-            \ ['darkgreen',   'firebrick3'],
-            \ ['darkcyan',    'RoyalBlue3'],
-            \ ['darkred',     'SeaGreen3'],
-            \ ['darkmagenta', 'DarkOrchid3'],
-            \ ['brown',       'firebrick3'],
-            \ ['gray',        'RoyalBlue3'],
-            \ ['darkmagenta', 'DarkOrchid3'],
-            \ ['Darkblue',    'firebrick3'],
-            \ ['darkgreen',   'RoyalBlue3'],
-            \ ['darkcyan',    'SeaGreen3'],
-            \ ['darkred',     'DarkOrchid3'],
-            \ ['red',         'firebrick3'],
-            \ ]
-
-" \ ['black',       'SeaGreen3'],
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Improve Rainbrow
@@ -467,12 +502,6 @@ endif
 nnoremap <Leader>tt :TagbarToggle<cr><c-w>=
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vim-indent-guides
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_color_change_percent = 7
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nman
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent>K :Nman <C-R><C-W><CR>
@@ -502,14 +531,6 @@ if has("autocmd")
     autocmd FileType go nmap <leader>i <Plug>(go-info)
     autocmd FileType go nmap <leader>e <Plug>(go-rename)
 endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Wildfire
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:wildfire_objects = {
-            \ "*" : ["i'", 'i"', "i)", "i]", "i}", "ip"],
-            \ "html,xml" : ["at"],
-            \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-json
