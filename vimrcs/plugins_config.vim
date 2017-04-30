@@ -261,6 +261,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => FZF
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:fzf_command_prefix = 'Fzf'
 map <leader>f  :FZF<cr>
 map <leader>F  :FZF!<cr>
 map <leader>o  :FzfBuffers<cr>
@@ -269,10 +270,7 @@ map <leader>fm :FzfMaps<cr>
 map <leader>fk :FzfMarks<cr>
 map <leader>fc :FzfCommits<cr>
 map <leader>fh :FzfHistory<cr>
-map <leader>fs :FzfGFiles? <cr>
-let g:fzf_command_prefix = 'Fzf'
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+map <leader>fs :FzfGFiles?<cr>
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
