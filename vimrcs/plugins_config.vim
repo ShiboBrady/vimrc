@@ -39,13 +39,11 @@ Plug 'google/vim-searchindex'
 Plug 'vim-scripts/matchit.zip'
 Plug 'osyo-manga/vim-over'
 Plug 'mhinz/vim-startify'
-Plug 'corntrace/bufexplorer'
 Plug 'amix/open_file_under_cursor.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'amix/vim-zenroom2'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/YankRing.vim'
-Plug 'yegappan/mru'
 Plug 'justinmk/vim-gtfo'
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/limelight.vim'
@@ -121,34 +119,6 @@ let g:solarized_contrast  =     "high"
 let g:solarized_visibility=     "high"
 let g:solarized_hitrail   =     1
 let g:solarized_menu      =     0
-
-""""""""""""""""""""""""""""""
-" => bufExplorer plugin
-""""""""""""""""""""""""""""""
-let g:bufExplorerDefaultHelp=0
-let g:bufExplorerShowRelativePath=1
-let g:bufExplorerFindActive=1
-let g:bufExplorerSortBy='name'
-map <leader>o :BufExplorer<cr>
-
-""""""""""""""""""""""""""""""
-" => MRU plugin
-""""""""""""""""""""""""""""""
-let MRU_Max_Entries = 400
-map <leader>F :MRU<CR>
-
-""""""""""""""""""""""""""""""
-" => ZenCoding(Emmit)
-""""""""""""""""""""""""""""""
-" Enable all functions in all modes
-let g:user_zen_mode='a'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => surround.vim config
-" Annotate strings with gettext http://amix.dk/blog/post/19678
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-vmap Si S(i_<esc>f)
-au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vimroom
@@ -291,8 +261,13 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => FZF
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>f :FZF<cr>
-map <leader>fu :FZF!<cr>
+map <leader>f  :FZF<cr>
+map <leader>F  :FZF!<cr>
+map <leader>fa :FzfAg <c-r><c-w><cr>
+map <leader>o  :FzfBuffers<cr>
+map <leader>fm :FzfMaps<cr>
+map <leader>fc :FzfCommits<cr>
+map <leader>fh :FzfHistory<cr>
 let g:fzf_command_prefix = 'Fzf'
 
 " Mapping selecting mappings
@@ -313,14 +288,14 @@ inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
 
 function! s:make_sentence(lines)
-  return substitute(join(a:lines), '^.', '\=toupper(submatch(0))', '').'.'
+    return substitute(join(a:lines), '^.', '\=toupper(submatch(0))', '').'.'
 endfunction
 
 inoremap <expr> <c-x><c-s> fzf#complete({
-  \ 'source':  'cat /usr/share/dict/words',
-  \ 'reducer': function('<sid>make_sentence'),
-  \ 'options': '--multi --reverse --margin 15%,0',
-  \ 'left':    20})
+            \ 'source':  'cat /usr/share/dict/words',
+            \ 'reducer': function('<sid>make_sentence'),
+            \ 'options': '--multi --reverse --margin 15%,0',
+            \ 'left':    20})
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ListToggle
