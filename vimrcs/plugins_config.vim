@@ -36,7 +36,6 @@ Plug 'mileszs/ack.vim'
 Plug 'mbbill/undotree'
 Plug 'google/vim-searchindex'
 Plug 'vim-scripts/matchit.zip'
-Plug 'osyo-manga/vim-over'
 Plug 'mhinz/vim-startify'
 Plug 'amix/open_file_under_cursor.vim'
 Plug 'junegunn/goyo.vim'
@@ -68,10 +67,7 @@ Plug 'rhysd/vim-clang-format'
 Plug 'vim-scripts/a.vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/syntastic'
-" Plug 'w0rp/ale'
 Plug 'vim-scripts/Conque-GDB'
-Plug 'Mizuchi/STL-Syntax'
-Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Snip
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -115,7 +111,7 @@ call plug#end()
 " => Molokai
 """"""""""""""""""""""""""""""
 let g:molokai_original=1
-let g:rehash256 = 1
+let g:rehash256 = 0
 
 """"""""""""""""""""""""""""""
 " => Solarized
@@ -438,15 +434,6 @@ let g:pymode_rope_complete_on_dot = 0
 "let g:pymode_python = 'python'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => cpp higlight
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:cpp_class_scope_highlight = 1
-let g:cpp_concepts_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_experimental_template_highlight = 1
-let g:cpp_experimental_simple_template_highlight = 1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YankRing
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:yankring_history_dir = '~/.vim_runtime/temp_dirs'
@@ -525,3 +512,8 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
 let g:vim_json_syntax_conceal = 0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Color-coded 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:color_coded_filetypes = ['c', 'cc', 'cpp', 'objc']
