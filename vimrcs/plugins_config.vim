@@ -44,7 +44,6 @@ Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'justinmk/vim-gtfo'
 Plug 'junegunn/vim-peekaboo'
-Plug 'junegunn/limelight.vim'
 
 " Program
 function! BuildYCM(info)
@@ -111,7 +110,7 @@ call plug#end()
 " => Molokai
 """"""""""""""""""""""""""""""
 let g:molokai_original=1
-let g:rehash256 = 1
+let g:rehash256 = 0
 
 """"""""""""""""""""""""""""""
 " => Solarized
@@ -133,35 +132,6 @@ let g:solarized_menu      =     0
 let g:goyo_width=100
 let g:goyo_margin_top = 2
 let g:goyo_margin_bottom = 2
-let g:limelight_paragraph_span = 1
-let g:limelight_priority = -1
-
-function! s:goyo_enter()
-    if has('gui_running')
-        set fullscreen
-        set background=light
-        set linespace=7
-    elseif exists('$TMUX')
-        silent !tmux set status off
-    endif
-    Limelight
-    let &l:statusline = '%M'
-    hi StatusLine ctermfg=red guifg=red cterm=NONE gui=NONE
-endfunction
-
-function! s:goyo_leave()
-    if has('gui_running')
-        set nofullscreen
-        set background=dark
-        set linespace=0
-    elseif exists('$TMUX')
-        silent !tmux set status on
-    endif
-    Limelight!
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
 nnoremap <silent> <leader>z :Goyo<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
