@@ -58,7 +58,6 @@ function! BuildColorCoded(info)
     endif
 endfunction
 Plug 'jeaye/color_coded', {'do' : function('BuildColorCoded')}
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'Valloric/ListToggle'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'vim-scripts/indexer.tar.gz'
@@ -86,6 +85,9 @@ Plug 'digitaltoad/vim-pug'
 
 " System language
 Plug 'nickhutchinson/vim-systemtap'
+
+"Go
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 " Python
 Plug 'klen/python-mode', { 'branch': 'master' }
