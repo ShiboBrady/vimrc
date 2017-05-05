@@ -169,6 +169,7 @@ endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
+let $LC_ALL="en_US.UTF-8"
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
