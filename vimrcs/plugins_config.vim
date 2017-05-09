@@ -38,12 +38,9 @@ Plug 'google/vim-searchindex'
 Plug 'vim-scripts/matchit.zip'
 Plug 'mhinz/vim-startify'
 Plug 'amix/open_file_under_cursor.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'amix/vim-zenroom2'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'justinmk/vim-gtfo'
-Plug 'junegunn/vim-peekaboo'
 
 " Program
 function! BuildYCM(info)
@@ -127,14 +124,6 @@ let g:solarized_contrast  =     "high"
 let g:solarized_visibility=     "high"
 let g:solarized_hitrail   =     1
 let g:solarized_menu      =     0
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vimroom
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:goyo_width=100
-let g:goyo_margin_top = 2
-let g:goyo_margin_bottom = 2
-nnoremap <silent> <leader>z :Goyo<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git gutter (Git diff)
