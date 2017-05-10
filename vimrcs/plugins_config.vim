@@ -270,8 +270,8 @@ inoremap <expr> <c-x><c-s> fzf#complete({
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => ListToggle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:lt_location_list_toggle_map = '<leader>lt'
-let g:lt_quickfix_list_toggle_map = '<leader>lq'
+let g:lt_location_list_toggle_map = '<leader>L'
+let g:lt_quickfix_list_toggle_map = '<leader>Q'
 let g:lt_height = 10
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
