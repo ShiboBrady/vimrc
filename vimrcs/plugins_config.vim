@@ -16,7 +16,7 @@ Plug 'nhooyr/neoman.vim'
 Plug 'lifepillar/vim-cheat40'
 
 " Font and Corlor and Theme
-Plug 'powerline/fonts'
+Plug 'powerline/fonts', {'do': './install.sh'}
 Plug 'luochen1990/rainbow'
 Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
